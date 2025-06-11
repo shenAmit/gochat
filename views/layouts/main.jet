@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    {{ include("./partials/header.jet") }}
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-800">
+
+    {{ if navigation }}
+      {{ include("./partials/navbar-main.jet") }}
+    {{ end }}
+
+    <main class="bg-gray-50 dark:bg-gray-900">
+      {{ block content() }}{{ end }}
+    </main>
+
+    {{ if footer }}
+      {{ include("./partials/footer-main.jet") }}
+    {{ end }}
+
+    {{ include("./partials/scripts.jet") }}
+
+  </body>
+</html>
