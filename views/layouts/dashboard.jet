@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
-    <%- include('./partials/header.ejs') %>
+    {{ include("./partials/header.jet") }}
   </head>
   <body class="bg-gray-50 dark:bg-gray-800">
-    <%- include('./partials/navbar-dashboard.ejs') %>
+    {{ include("./partials/navbar-dashboard.jet") }}
 
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <%- include('./partials/sidebar.ejs') %>
+      {{ include("./partials/sidebar.jet") }}
 
       <div
         id="main-content"
         class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900"
       >
-        <main><%- body %></main>
+        <main>{{ block content }}{{ end }}</main>
 
-        <% if (locals.footer && locals.footer === true) { %> <%-
-        include('./partials/footer.ejs') %> <% } %>
+        {{ if footer }}
+          {{ include("./partials/footer.jet") }}
+        {{ end }}
       </div>
     </div>
 
-    <%- include('./partials/scripts.ejs') %>
+    {{ include("./partials/scripts.jet") }}
   </body>
 </html>

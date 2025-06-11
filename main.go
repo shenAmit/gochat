@@ -14,13 +14,10 @@ func main() {
 	})
 	app.Static("/", "./public")
 
+
 	config.ConnectMongoDB()
 	routes.SetupRoutes(app)
 
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("layouts/index", fiber.Map{"Title": "Jet + Fiber"})
-	})
 
 	app.Listen(":3000")
 }

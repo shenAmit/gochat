@@ -8,7 +8,7 @@ import (
 )
 
 func ConnectMongoDB() {
-	err := mgm.SetDefaultConfig(nil, "gochat", options.Client().ApplyURI("mongodb://localhost:27017"))
+	err := mgm.SetDefaultConfig(nil, "gochat", options.Client().ApplyURI("mongodb://localhost:27017/gochat"))
 	if err != nil {
 		log.Fatalf("❌ Failed to connect to MongoDB: %v", err)
 	}
