@@ -6,8 +6,6 @@ import (
 )
 
 func AdminRoutes(app fiber.Router) {
-	route := app.Group("/")
-
-	route.Get("/",admin.AdminDashboard)
+	app.Get("/", admin.AdminDashboard)
 
 }

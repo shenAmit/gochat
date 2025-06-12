@@ -1,10 +1,20 @@
 package routes
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
+)
 
 func SetupRoutes(app *fiber.App) {
-	admin := app.Group("/")
+	app.Use(logger.New())
+	app.Use(cors.New())
+	app.Use(recover.New())
 
-	AdminRoutes(admin)
-	ApiRoutes(admin)
+	adminGroup := app.Group("/")
+	AdminRoutes(adminGroup)
+
+	apiGroup := app.Group("/api")
+	ApiRoutes(apiGroup)
 }

@@ -1,0 +1,81 @@
+{{define "partials/scripts"}}
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="/app.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"
+></script>
+
+<!-- Include Quill (CDN) -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<!-- Initialize Quill -->
+<script>
+  const quill = new Quill("#editor", {
+    theme: "snow",
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        ["bold", "italic", "underline"],
+        ["blockquote", "code-block"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link", "image"],
+        ["clean"],
+      ],
+    },
+    placeholder: "Type here...",
+  });
+
+  // Set initial content if present
+  const initialAnswer = "thi";
+
+  // Before form submit, set value
+  $("form").on("submit", function () {
+    $("#editor_content").val(quill.root.innerHTML); // Set hidden input with Quill content
+  });
+
+  // common delete function
+  let deleteUrl = null;
+
+  // Step 1: Set URL when delete button is clicked
+  $(".delete-btn").on("click", function () {
+    deleteUrl = $(this).data("url");
+  });
+
+  // Step 2: Handle confirmation click
+  $("#confirm-delete-user").on("click", function () {
+    if (!deleteUrl) return;
+
+    $.ajax({
+      url: deleteUrl,
+      type: "DELETE",
+      success: function () {
+        // Optional: Show success message or toast
+        location.reload();
+      },
+      error: function (xhr, status, error) {
+        console.error("Delete error:", error);
+        alert("Something went wrong.");
+      },
+    });
+  });
+
+
+
+  // Multiple select 2
+  $(".select2").select2({
+    placeholder: "Select a option",
+    maximumSelectionLength: 100,
+  });
+
+
+
+
+</script>
+
+
+{{end}}

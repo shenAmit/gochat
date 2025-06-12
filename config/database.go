@@ -2,13 +2,15 @@ package config
 
 import (
 	"log"
+	"os"
 
 	"github.com/kamva/mgm/v3"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func ConnectMongoDB() {
-	err := mgm.SetDefaultConfig(nil, "gochat", options.Client().ApplyURI("mongodb://localhost:27017/gochat"))
+	mongoURI := os.Getenv("MONGO_URI")
+	err := mgm.SetDefaultConfig(nil, "gochat", options.Client().ApplyURI(mongoURI))
 	if err != nil {
 		log.Fatalf("❌ Failed to connect to MongoDB: %v", err)
 	}

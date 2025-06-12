@@ -1,8 +1,9 @@
 export default {
   darkMode: "class",
   content: [
-    "./content/**/*.ejs",
-    "./layouts/**/*.ejs",
+    "./content/**/*.html",
+    "./layouts/**/*.html",
+    "./templates/**/*.html",
     "./node_modules/flowbite/**/*.js",
   ],
   safelist: [

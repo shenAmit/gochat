@@ -1,0 +1,17 @@
+{{define "partials/social"}}
+<!-- Twitter -->
+<meta name="twitter:card" content="{{ if .IsHome }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:site" content="@{{ .twitter }}">
+<meta name="twitter:creator" content="@{{ .twitter }}">
+<meta name="twitter:title" content="{{ .title }}">
+<meta name="twitter:description" content="{{ .description }}">
+<meta name="twitter:image" content="{{ .twitter_image }}">
+
+<!-- Facebook -->
+<meta property="og:url" content="{{ .canonical }}">
+<meta property="og:title" content="{{ .title }}">
+<meta property="og:description" content="{{ .description }}">
+<meta property="og:type" content="{{ if .is_page }}article{{ else }}website{{ end }}">
+<meta property="og:image" content="{{ .og_image }}">
+<meta property="og:image:type" content="image/png">
+{{end}}

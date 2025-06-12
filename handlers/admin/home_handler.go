@@ -5,8 +5,8 @@ import (
 )
 
 func AdminDashboard(c *fiber.Ctx) error {
-	return c.Render("/content/index", fiber.Map{
-		"navigation": true,
-		"footer":     true,
-	}, "layouts/main.jet")
+	return c.Render("crud/index", fiber.Map{
+		"title": "Admin Dashboard",
+	}, "layouts/dashboard")
+
 }

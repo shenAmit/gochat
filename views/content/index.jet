@@ -1,5 +1,0 @@
-{{ extends "../layouts/main.jet" }}
-
-{{ block content }}
-<h1>HII</h1>
-{{ end }}
