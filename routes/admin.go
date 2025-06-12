@@ -7,5 +7,5 @@ import (
 
 func AdminRoutes(app fiber.Router) {
 	app.Get("/", admin.AdminDashboard)
-
+	app.Get("/setting", admin.SettingHandler)
 }

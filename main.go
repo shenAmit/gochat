@@ -19,7 +19,6 @@ func main() {
 	engine := html.New("./templates", ".html")
 
 	engine.Reload(true)
-	engine.Debug(true)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
