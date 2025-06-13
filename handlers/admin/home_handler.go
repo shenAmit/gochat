@@ -5,18 +5,8 @@ import (
 )
 
 func AdminDashboard(c *fiber.Ctx) error {
-	val := c.Locals("isHTMX")
-	isHTMX, ok := val.(bool)
-	if !ok {
-		isHTMX = false
-	}
-
-	if isHTMX {
-		return c.Render("crud/index", fiber.Map{
-			"title": "Admin Dashboard",
-		})
-	}
-	return c.Render("layouts/dashboard", fiber.Map{
+	layout, _ := c.Locals("layout").(string)
+	return c.Render("crud/index", fiber.Map{
 		"title": "Admin Dashboard",
-	}, "layouts/dashboard")
+	}, layout)
 }
