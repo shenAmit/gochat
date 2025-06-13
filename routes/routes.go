@@ -13,7 +13,7 @@ func SetupRoutes(app *fiber.App) {
 	app.Use(cors.New())
 	app.Use(recover.New())
 
-	adminGroup := app.Group("/", middleware.SetHTMXLayout("layouts/dashboard"))
+	adminGroup := app.Group("/", middleware.HTMXCheck())
 	AdminRoutes(adminGroup)
 
 	apiGroup := app.Group("/api")

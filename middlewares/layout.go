@@ -4,13 +4,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetHTMXLayout(defaultLayout string) fiber.Handler {
+func HTMXCheck() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		if c.Get("HX-Request") == "true" {
-			c.Locals("layout", "") // no layout for HTMX
-		} else {
-			c.Locals("layout", defaultLayout)
-		}
-		return c.Next()
+		isHTMX := c.Get("HX-Request") == "true"
+		c.Locals("isHTMX", isHTMX) // Store the boolean in the context
+		return c.Next()            // Pass control to the next handler
 	}
 }
