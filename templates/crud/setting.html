@@ -1,0 +1,238 @@
+
+
+<main>
+    <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="mb-4 col-span-full xl:mb-2">
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+                Platform settings
+            </h1>
+        </div>
+        
+        <!-- Left Content -->
+        <div class="col-span-full xl:col-auto">
+            <!-- Site Logo Section -->
+            <form action="/settings/site-logo" method="POST" enctype="multipart/form-data">
+                <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                    <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+                        <!-- Hidden File Input -->
+                        <input type="file" name="site_logo" id="siteLogo" accept="image/*" class="hidden">
+                        
+                        <!-- Clickable Image -->
+                        <label for="siteLogo" class="cursor-pointer">
+                            <img id="siteLogoPreview" class="mb-4 rounded-lg w-28 h-28 object-cover cursor-pointer sm:mb-0 xl:mb-4 2xl:mb-0" src="https://djplay.webdemozone.com/uploads/meta-files/3b6430a8-d303-4e33-8a2d-c9f6c76deb55-1748856078177.png" alt="Site Logo">
+                        </label>
+                        
+                        <div>
+                            <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">Site Logo</h3>
+                            <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">JPG, GIF or PNG. Max size of 800K</div>
+                            <div class="flex items-center space-x-4">
+                                <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Upload
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Social Links Section -->
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white text-center">
+                    Social links
+                </h3>
+                <div class="flow-root">
+                    <form action="/save-social-links" method="post">
+                        <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <li class="py-4">
+                                <div class="flex-1 min-w-0">
+                                    <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
+                                        Facebook account
+                                    </span>
+                                    <input type="url" name="facebook" value="https://www.facebook.com" placeholder="Enter Facebook URL" class="mt-2 block w-full text-sm font-normal text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                                </div>
+                            </li>
+                            
+                            <li class="py-4">
+                                <div class="flex-1 min-w-0">
+                                    <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
+                                        Twitter account
+                                    </span>
+                                    <input name="twitter" type="url" placeholder="Enter Twitter URL" value="https://www.x.com" class="mt-2 block w-full text-sm font-normal text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                                </div>
+                            </li>
+                            
+                            <li class="py-4">
+                                <div class="flex-1 min-w-0">
+                                    <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
+                                        YouTube account
+                                    </span>
+                                    <input name="youtube" type="url" value="https://www.youtube.com/watch?v=wknGvg0sTAc" placeholder="Enter YouTube URL" class="mt-2 block w-full text-sm font-normal text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                                </div>
+                            </li>
+                            
+                            <li class="py-4">
+                                <div class="flex-1 min-w-0">
+                                    <span class="block text-base font-semibold text-gray-900 truncate dark:text-white">
+                                        Instagram account
+                                    </span>
+                                    <input name="instagram" type="url" placeholder="Enter Instagram URL" value="https://www.instagram.com" class="mt-2 block w-full text-sm font-normal text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mt-4">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Password Section -->
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    Password information
+                </h3>
+                <form action="/change-password" method="post">
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="cpassword" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current password</label>
+                            <input type="password" name="cpassword" id="cpassword" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New password</label>
+                            <input type="password" name="newPassword" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                            <input type="password" name="confirmPassword" id="confirm-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required>
+                        </div>
+                        <div class="col-span-6">
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Right Content -->
+        <div class="col-span-2">
+            <!-- General Information -->
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    General information
+                </h3>
+                <form action="/settings/general" method="post">
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="app-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">App Name</label>
+                            <input type="text" name="app_name" id="app-name" value="DjPlayNow" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="App Name" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="support-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Support Email</label>
+                            <input type="email" name="support_email" value="admin@admin.com" id="support-email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="support@example.com" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="android_version" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Android Version</label>
+                            <input type="text" name="android_version" value="1.0.1" id="android_version" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1.0.0" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="ios_version" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">iOS Version</label>
+                            <input type="text" name="ios_version" id="ios_version" value="1.0.0" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1.0.0" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="is_maintenance_mode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maintenance Mode</label>
+                            <select name="is_maintenance_mode" id="is_maintenance_mode" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
+                            <input type="tel" name="phone_number" value="03767832643" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+(12)3456 789" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="platform_fee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Platform Fee (Percentage)</label>
+                            <input type="number" name="platform_fee" min="1" value="6" id="platform_fee" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="platform_fee_fixed" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Platform Fee (Fixed)</label>
+                            <input type="number" name="platform_fee_fixed" min="1" value="500" id="platform_fee_fixed" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="token_value" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Token value (In USD)</label>
+                            <input type="text" name="token_value" pattern="^\d+(\.\d+)?$" placeholder="e.g. 0.01" value="2.5" id="token_value" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        </div>
+                        <div class="col-span-6">
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Active Sessions -->
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <div class="flow-root">
+                    <h3 class="text-xl font-semibold dark:text-white mb-4">Active Sessions</h3>
+                    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <li class="py-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-base font-semibold text-gray-900 truncate dark:text-white">
+                                        Lucknow 106.219.68.171
+                                    </p>
+                                    <p class="text-sm font-normal text-gray-500 truncate dark:text-gray-400">
+                                        Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+                                    </p>
+                                    <span class="text-xs font-medium text-gray-500 dark:text-gray-400">
+                                        Fri Jun 13 2025 06:38:50 GMT+0000
+                                    </span>
+                                </div>
+                                <div class="inline-flex items-center">
+                                    <a href="/revoke-session/l79-r8UXbsucbMyDPX7DXM8xREM8_3Zw" class="px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                        Revoke
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="py-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-base font-semibold text-gray-900 truncate dark:text-white">
+                                        Unknown 8.8.8.8
+                                    </p>
+                                    <p class="text-sm font-normal text-gray-500 truncate dark:text-gray-400">
+                                        Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+                                    </p>
+                                    <span class="text-xs font-medium text-gray-500 dark:text-gray-400">
+                                        Fri Jun 13 2025 06:33:04 GMT+0000
+                                    </span>
+                                </div>
+                                <div class="inline-flex items-center">
+                                    <a href="/revoke-session/9MuQs3ZZhq_a-8neT26p4goINsMi08w2" class="px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                        Revoke
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

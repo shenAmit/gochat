@@ -76,6 +76,21 @@
 
 
 </script>
-
+<script>
+  document.getElementById('siteLogo').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              document.getElementById('siteLogoPreview').src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+      }
+  });
+  
+  document.getElementById('token_value').addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+  });
+  </script>
 
 {{end}}
