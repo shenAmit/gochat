@@ -1,15 +1,22 @@
 package admin
 
 import (
-	"time"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/kamva/mgm/v3"
-	"github.com/shenAmit/gochat/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"golang.org/x/crypto/bcrypt"
+
+	"github.com/shenAmit/gochat/models"
+	"github.com/shenAmit/gochat/utils"
 )
 
 func LoginPage(c *fiber.Ctx) error {
+	sess, _ := utils.Store.Get(c)
+	adminID := sess.Get("admin_id")
+
+	if adminID != nil {
+		return c.Redirect("/v1")
+	}
 	return c.Render("content/authentication/sign-in", fiber.Map{
 		"title": "Login - Chat",
 	})
@@ -19,7 +26,6 @@ func LoginHandler(c *fiber.Ctx) error {
 	type LoginInput struct {
 		Email    string `form:"email"`
 		Password string `form:"password"`
-		Remember string `form:"remember"`
 	}
 
 	var input LoginInput
@@ -30,29 +36,29 @@ func LoginHandler(c *fiber.Ctx) error {
 	}
 
 	user := &models.User{}
-	err := mgm.Coll(user).First(bson.M{"email": input.Email}, user)
-	if err != nil {
+	if err := mgm.Coll(user).First(bson.M{"email": input.Email}, user); err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"error": "Invalid credentials",
 		})
 	}
 
-	// TODO: Replace with secure password check (e.g. bcrypt)
-	if user.Password != input.Password {
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"error": "Incorrect password",
 		})
 	}
 
-	// Set a cookie as session
-	c.Cookie(&fiber.Cookie{
-		Name:     "admin_session",
-		Value:    user.ID.Hex(),
-		Expires:  time.Now().Add(24 * time.Hour),
-		HTTPOnly: true,
-		Path:     "/",
-	})
+	sess, _ := utils.Store.Get(c)
+	sess.Set("admin_id", user.ID.Hex())
+	sess.Save()
 
-	// If using HTMX, you may want to swap content or redirect with JS
-	return c.SendString(`<script>window.location.href="/";</script>`)
+	return c.SendString(`<script>window.location.href="/v1";</script>`)
+}
+
+func LogoutHandler(c *fiber.Ctx) error {
+	sess, _ := utils.Store.Get(c)
+	sess.Destroy()
+	sess.Save()
+
+	return c.Redirect("/v1/login")
 }

@@ -69,51 +69,25 @@
           background-position: 0% 50%;
         }
       }
-      .logo-spin {
-        animation: logoSpin 20s linear infinite;
-      }
-      @keyframes logoSpin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      .slide-in {
-        animation: slideIn 0.6s ease-out;
-      }
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .glow-effect {
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-      }
-      .text-shadow {
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
     </style>
   </head>
   <body class="min-h-screen gradient-bg flex items-center justify-center p-4">
-    <div class="w-full max-w-lg slide-in">
+    <div class="w-full max-w-lg slide-in relative z-10">
       <!-- Main Card -->
-      <div class="bg-white rounded-3xl shadow-2xl card-hover overflow-hidden">
+      <div
+        class="bg-white rounded-3xl shadow-2xl card-hover overflow-hidden relative z-10"
+      >
         <!-- Header Section -->
         <div
-          class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 text-center text-white relative"
+          class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 text-center text-white relative z-10"
         >
-          <div class="absolute inset-0 bg-black opacity-10"></div>
+          <!-- Transparent overlay but does NOT block clicks -->
+          <div
+            class="absolute inset-0 bg-black opacity-10 pointer-events-none z-0"
+          ></div>
           <div class="relative z-10">
-            <!-- Logo -->
             <div
-              class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4 logo-spin"
+              class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4"
             >
               <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -123,42 +97,22 @@
                 ></path>
               </svg>
             </div>
-            <h1 class="text-3xl font-bold mb-2 text-shadow">Welcome Back</h1>
+            <h1 class="text-3xl font-bold mb-2">Welcome Back</h1>
             <p class="text-white/80 text-sm">
               Sign in to continue your conversations
             </p>
           </div>
         </div>
-
-        <!-- Form Section -->
-        <div class="p-8">
-          <!-- Error Alert -->
+        <div id="error-container" class="hidden mt-4">
           <div
-            id="error-alert"
-            class="hidden mb-6 p-4 bg-red-50 border-l-4 border-red-400 rounded-r-lg"
-          >
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-2"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-              <span
-                id="error-text"
-                class="text-red-700 text-sm font-medium"
-              ></span>
-            </div>
-          </div>
+            class="bg-red-100 text-red-700 p-3 rounded-md text-sm"
+            id="error-message"
+          ></div>
+        </div>
 
-          <!-- Login Form -->
+        <div class="p-8 relative z-20 bg-white">
           <form
-            hx-post="/login"
+            hx-post="/v1/login"
             hx-target="#form-container"
             hx-swap="outerHTML"
             hx-indicator="#loading"
@@ -170,33 +124,13 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                   Email Address
                 </label>
-                <div class="relative">
-                  <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                      ></path>
-                    </svg>
-                  </div>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="Enter your email"
-                    class="input-focus w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none text-gray-700"
-                    autocomplete="email"
-                  />
-                </div>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email"
+                  class="input-focus w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none text-gray-700"
+                />
               </div>
 
               <!-- Password Field -->
@@ -204,74 +138,27 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                   Password
                 </label>
-                <div class="relative">
-                  <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                  >
-                    <svg
-                      class="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    placeholder="Enter your password"
-                    class="input-focus w-full pl-10 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none text-gray-700"
-                    autocomplete="current-password"
-                  />
-                  <button
-                    type="button"
-                    onclick="togglePassword()"
-                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-                  >
-                    <svg
-                      id="eye-icon"
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      ></path>
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  placeholder="Enter your password"
+                  class="input-focus w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none text-gray-700"
+                />
               </div>
 
-              <!-- Remember Me & Forgot Password -->
+              <!-- Remember Me -->
               <div class="flex items-center justify-between mb-2">
                 <label class="flex items-center">
                   <input
                     type="checkbox"
                     name="remember"
-                    class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    class="w-4 h-4 text-indigo-600 border-gray-300 rounded"
                   />
                   <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
                 <a
-                  href="/forgot-password"
+                  href="#"
                   class="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
                 >
                   Forgot password?
@@ -281,7 +168,7 @@
               <!-- Submit Button -->
               <button
                 type="submit"
-                class="w-full py-3 px-4 btn-gradient text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 glow-effect"
+                class="w-full py-3 px-4 btn-gradient text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
               >
                 <span id="btn-text">Sign In</span>
               </button>
@@ -291,9 +178,10 @@
       </div>
     </div>
 
+    <!-- Loading Spinner -->
     <div
       id="loading"
-      class="htmx-indicator fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      class="htmx-indicator fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
     >
       <div class="bg-white rounded-2xl p-8 flex items-center space-x-4">
         <div
@@ -302,7 +190,6 @@
         <span class="text-gray-700 font-medium">Signing you in...</span>
       </div>
     </div>
-
     <script>
       function togglePassword() {
         const passwordInput = document.getElementById("password");
@@ -329,21 +216,21 @@
       });
 
       document.body.addEventListener("htmx:afterRequest", function (evt) {
-        document.getElementById("btn-text").textContent = "Sign In";
+        const errorBox = document.getElementById("error-container");
+        const errorMsg = document.getElementById("error-message");
 
-        if (evt.detail.xhr.status >= 400) {
-          const errorAlert = document.getElementById("error-alert");
-          const errorText = document.getElementById("error-text");
+        const status = evt.detail.xhr.status;
 
+        if (status >= 400) {
           try {
-            const response = JSON.parse(evt.detail.xhr.responseText);
-            errorText.textContent =
-              response.error || "Invalid email or password";
-          } catch (e) {
-            errorText.textContent = "Invalid email or password";
+            const json = JSON.parse(evt.detail.xhr.responseText);
+            errorMsg.textContent = json.error || "Something went wrong.";
+          } catch {
+            errorMsg.textContent = "Login failed. Try again.";
           }
-
-          errorAlert.classList.remove("hidden");
+          errorBox.classList.remove("hidden");
+        } else {
+          errorBox.classList.add("hidden"); // Hide on success
         }
       });
     </script>

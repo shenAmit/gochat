@@ -12,9 +12,9 @@ func SetupRoutes(app *fiber.App) {
 	app.Use(cors.New())
 	app.Use(recover.New())
 
-	adminGroup := app.Group("/")
+	adminGroup := app.Group("/v1")
 	AdminRoutes(adminGroup)
 
-	apiGroup := app.Group("/api")
+	apiGroup := app.Group("/api/v1")
 	ApiRoutes(apiGroup)
 }

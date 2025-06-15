@@ -9,9 +9,10 @@ import (
 func AdminRoutes(app fiber.Router) {
 	app.Get("/login", admin.LoginPage)
 	app.Post("/login", admin.LoginHandler)
-
+	app.Get("/debug/session", admin.DebugSession)
 	app.Use(middleware.IsAdmin)
 
+	app.Get("/logout", admin.LogoutHandler)
 	app.Get("/", admin.AdminDashboard)
 	app.Get("/setting", admin.SettingHandler)
 }
