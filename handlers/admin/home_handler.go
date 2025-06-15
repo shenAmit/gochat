@@ -10,3 +10,8 @@ func AdminDashboard(c *fiber.Ctx) error {
 		"title": "Admin Dashboard",
 	}, "layouts/dashboard")
 }
+func loginPage(c *fiber.Ctx) error {
+	return c.Render("content/authentication/sign-in", fiber.Map{
+		"title": "Login - Chat",
+	})
+}
